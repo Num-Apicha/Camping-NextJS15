@@ -5,6 +5,7 @@ import FormInput from '@/components/form/FormInput';
 import CategoryInput from '@/components/form/CategoryInput';
 import TextareaInput from '@/components/form/TextareaInput';
 import ProvinceInput from '@/components/form/ProvinceInput';
+import MapLandmark from '@/components/map/MapLandmark';
 
 const CreateLandmark = async () => {
   return (
@@ -42,15 +43,18 @@ const CreateLandmark = async () => {
               defaultValue=""
               required={true}
             />
-
-            <TextareaInput
-              name="description"
-              label="Description"
-              defaultValue=""
-              rows={5}
-              required={false}
-            />
           </div>
+
+          <TextareaInput
+            name="description"
+            label="Description"
+            defaultValue=""
+            rows={5}
+            required={false}
+          />
+
+          {/* location={{ lat: 14, lng: 99 }} */}
+          <MapLandmark />
 
           <SubmitButton text="Create landmark" size="lg" />
         </FormContainer>
