@@ -34,7 +34,7 @@ const ProvinceInput = ({
           </SelectTrigger>
           <SelectContent>
             {provinces.map((province, index) => (
-              <SelectItem key={index} value={province.PROVINCE_ID.toString()}>
+              <SelectItem key={index} value={province.PROVINCE_NAME.toString()}>
                 {province.PROVINCE_NAME}
               </SelectItem>
             ))}

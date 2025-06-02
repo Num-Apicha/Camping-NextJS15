@@ -49,7 +49,7 @@ const MapLandmark = ({
   location?: { lat: number; lng: number };
 }) => {
   const defaultLocation: [number, number] = [7.405534, 99.509659];
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState<LatLng | null>(null);
 
   console.log('MapLandmark position:', position);
   return (

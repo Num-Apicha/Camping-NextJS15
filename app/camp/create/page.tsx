@@ -6,6 +6,7 @@ import CategoryInput from '@/components/form/CategoryInput';
 import TextareaInput from '@/components/form/TextareaInput';
 import ProvinceInput from '@/components/form/ProvinceInput';
 import MapLandmark from '@/components/map/MapLandmark';
+import ImageInput from '@/components/form/ImageInput';
 
 const CreateLandmark = async () => {
   return (
@@ -15,7 +16,7 @@ const CreateLandmark = async () => {
       </h1>
       <div className="border p-8 rounded-md">
         <FormContainer action={createLandmarkAction}>
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 pb-2">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mb-2">
             <FormInput
               name="name"
               label="Landmark Name"
@@ -52,6 +53,8 @@ const CreateLandmark = async () => {
             rows={5}
             required={false}
           />
+
+          <ImageInput name="image" required={true} />
 
           {/* location={{ lat: 14, lng: 99 }} */}
           <MapLandmark />
