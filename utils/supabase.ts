@@ -25,7 +25,9 @@ export async function uploadFile(image: File) {
   const newName = `Abz-${timestamp}-${image.name}`;
   const { data, error } = await supabase.storage
     .from(bucket_name)
-    .upload(newName, image);
+    .upload(newName, image, {
+      cacheControl: '3600', // Cache for 1 hour
+    });
 
   if (!data) throw new Error(`Upload failed: ${error?.message}`);
   return supabase.storage.from(bucket_name).getPublicUrl(newName).data

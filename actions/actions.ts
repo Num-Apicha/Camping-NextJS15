@@ -11,6 +11,7 @@ import db from '@/utils/db';
 import { redirect } from 'next/navigation';
 import { actionFunction } from '@/utils/types';
 import { uploadFile } from '@/utils/supabase';
+import { revalidatePath } from 'next/cache';
 
 const renderError = (error: unknown): { message: string } => {
   return {
@@ -38,7 +39,7 @@ export const createProfileAction: actionFunction = async (
 
     const rawData = Object.fromEntries(formData.entries());
     const validateField = ValidateWithZod(profileSchema, rawData);
-    console.log('Validated:', validateField);
+    // console.log('Validated:', validateField);
 
     await db.profile.create({
       data: {
@@ -109,3 +110,73 @@ export const fetchLandmarks = async () =>
     });
     return landmarks;
   };
+
+export const fetchFavouriteId = async ({
+  landmarkId,
+}: {
+  landmarkId: string;
+}) => {
+  const user = await getAuthUser();
+  const favourite = await db.favorite.findFirst({
+    where: {
+      landmarkId: landmarkId,
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return favourite?.id || null;
+};
+
+export const toggleFavouriteAction = async (prevState: {
+  favouriteId: string | null;
+  landmarkId: string;
+  pathname: string;
+}) => {
+  const { favouriteId, landmarkId, pathname } = prevState;
+  const user = await getAuthUser();
+  try {
+    if (favouriteId) {
+      await db.favorite.delete({
+        where: { id: favouriteId, profileId: user.id },
+      });
+    } else {
+      await db.favorite.create({
+        data: {
+          landmarkId: landmarkId,
+          profileId: user.id,
+        },
+      });
+    }
+    revalidatePath(pathname);
+    return {
+      message: (favouriteId ? 'Removed' : 'Added') + ' favourite success',
+    };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
+export const fetchFavourites = async () => {
+  const user = await getAuthUser();
+  const favourites = await db.favorite.findMany({
+    where: { profileId: user.id },
+    select: {
+      landmark: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+          description: true,
+          price: true,
+          province: true,
+          category: true,
+          lat: true,
+          lng: true,
+        },
+      },
+    },
+  });
+  return favourites.map((favourite) => favourite.landmark);
+};
