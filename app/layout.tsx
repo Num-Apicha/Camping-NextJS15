@@ -4,15 +4,12 @@ import './globals.css';
 import Navbar from '@/components/Navbar/Navbar';
 import Providers from './Providers';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Kanit } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const kanit = Kanit({
+  variable: '--font-kanit',
+  subsets: ['latin', 'thai'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -28,9 +25,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${kanit.className} antialiased`}>
           <Providers>
             <Navbar />
             <main className="container">{children}</main>
