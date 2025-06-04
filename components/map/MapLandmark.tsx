@@ -51,7 +51,6 @@ const MapLandmark = ({
   const defaultLocation: [number, number] = [7.405534, 99.509659];
   const [position, setPosition] = useState<LatLng | null>(null);
 
-  // console.log('MapLandmark position:', position);
   return (
     <>
       <h1 className="mt-4 font-semibold">Pin location !!</h1>
