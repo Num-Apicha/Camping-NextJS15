@@ -1,7 +1,8 @@
 import { DarkMode } from './DarkMode';
 import DropdownListMenu from './DropdownListMenu';
-import Logo from './logo';
+import Logo from './Logo';
 import Search from './Search';
+import { Suspense } from 'react';
 
 const Navbar = () => {
   return (
@@ -10,7 +11,9 @@ const Navbar = () => {
         {/* Logo or brand name can go here */}
         <Logo />
         {/* Search */}
-        <Search />
+        <Suspense fallback={null}>
+          <Search />
+        </Suspense>
         {/*  DarkMode & Profile */}
         <div className="flex gap-4">
           <DarkMode />

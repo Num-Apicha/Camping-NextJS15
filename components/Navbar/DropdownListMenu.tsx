@@ -12,8 +12,6 @@ import UserIcon from './UserIcon';
 import Link from 'next/link';
 import { links } from '@/utils/links';
 import { SignedIn, SignedOut, SignUpButton, SignInButton } from '@clerk/nextjs';
-// import SignOutLinks from './SignOutLinks';
-import { Sign } from 'crypto';
 import SignOutLinks from './SignOutLinks';
 
 const DropdownListMenu = () => {

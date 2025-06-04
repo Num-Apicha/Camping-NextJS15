@@ -5,9 +5,9 @@ import { Suspense } from 'react';
 const HomePage = async ({
   searchParams,
 }: {
-  searchParams: { search?: string; category?: string };
+  searchParams: Promise<{ search?: string; category?: string }>;
 }) => {
-  const { search, category } = (await searchParams) || '';
+  const { search, category } = (await searchParams) || {};
 
   return (
     <>

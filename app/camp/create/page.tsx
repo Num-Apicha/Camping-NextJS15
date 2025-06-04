@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { createLandmarkAction } from '@/actions/actions';
 import { SubmitButton } from '@/components/form/Buttons';
 import FormContainer from '@/components/form/FormContainer';

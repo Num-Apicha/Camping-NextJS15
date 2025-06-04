@@ -5,8 +5,7 @@ import FavouriteToggleButton from './FavouriteToggleButton';
 import Link from 'next/link';
 
 const LandmarkCard = ({ Landmark }: { Landmark: LandmarkCardProps }) => {
-  const { id, name, description, image, price, province, lat, lng, category } =
-    Landmark;
+  const { id, name, description, image, price, province } = Landmark;
   return (
     <article className="group relative mb-4">
       <Link
